@@ -1,42 +1,124 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Tải Font chữ Inter từ Google Fonts cho hiện đại */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.maintenance-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* Gradient màu xanh nhẹ nhàng, thân thiện với nông sản */
+  background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+  color: #1f2937;
+  padding: 20px;
+}
+
+.maintenance-content {
+  max-width: 800px;
+  width: 100%;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.maintenance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+  padding: 0 10px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.group-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #166534; /* Màu xanh đậm hơn cho tên nhóm */
+}
+
+.vercel-link {
+  color: #16a34a; /* Màu xanh lá Vercel */
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.vercel-link:hover {
+  text-decoration: underline;
+}
+
+.maintenance-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 40px;
+  /* Hiệu ứng bóng đổ nhẹ cho hình ảnh */
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.05));
+}
+
+.maintenance-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+  color: #111827;
+}
+
+.maintenance-subtitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #4b5563;
+}
+
+.maintenance-text {
+  font-size: 1.1rem;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.maintenance-footer {
+  margin-top: 60px;
+  font-size: 1rem;
+  color: #9ca3af;
+}
+
+.maintenance-footer p {
+  margin-bottom: 5px;
+}
+
+.maintenance-footer a {
+  color: #166534;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.maintenance-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Tối ưu hóa cho thiết bị di động */
+@media (max-width: 768px) {
+  .maintenance-title {
+    font-size: 1.75rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .maintenance-subtitle {
+    font-size: 1rem;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .maintenance-text {
+    font-size: 0.95rem;
   }
-}
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  .maintenance-header {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
 }

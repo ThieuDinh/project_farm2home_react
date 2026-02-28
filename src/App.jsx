@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import './App.css'; // Chúng ta sẽ viết CSS trong này
+import constructionImg from './images/under_construction.png'; // Link tới hình ảnh bạn vừa lưu
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="maintenance-container">
+      <div className="maintenance-content">
+        {/* Phần Logo và Tên Nhóm */}
+        <header className="maintenance-header">
+          <span className="group-name">Nhom 8 - FE</span>
+          <a href="https://nhom8-fe.vercel.app" className="vercel-link">
+            https://nhom8-fe.vercel.app
+          </a>
+        </header>
+
+        {/* Phần Nội dung chính */}
+        <main className="maintenance-main">
+          <img
+            src={constructionImg}
+            alt="Dự án đang được phát triển"
+            className="maintenance-image"
+          />
+          <h1 className="maintenance-title">
+            CHÚNG TÔI ĐANG XÂY DỰNG WEBSITE NÔNG SẢN!
+          </h1>
+          <p className="maintenance-subtitle">
+            Dự án đang được phát triển, hãy quay lại sau!
+          </p>
+          <p className="maintenance-text">
+            Trang web sẽ được cập nhật tính năng mới sớm nhất. Cảm ơn sự kiên
+            nhẫn của bạn!
+          </p>
+        </main>
+
+        {/* Phần Chân trang (Liên hệ) */}
+        <footer className="maintenance-footer">
+          <p>Contact Us:</p>
+          <a href="mailto:support@nhom8nongsan.vn">support@nhom8nongsan.vn</a>
+        </footer>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
