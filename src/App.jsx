@@ -1,18 +1,13 @@
-import React from 'react';
-import './App.css'; // Chúng ta sẽ viết CSS trong này
-import constructionImg from './images/under_construction.png'; // Link tới hình ảnh bạn vừa lưu
-
+import React from "react";
+import "./App.css"; // Chúng ta sẽ viết CSS trong này
+import constructionImg from "./images/under_construction.png"; // Link tới hình ảnh bạn vừa lưu
+import { motion } from "framer-motion";
 function App() {
   return (
     <div className="maintenance-container">
       <div className="maintenance-content">
         {/* Phần Logo và Tên Nhóm */}
-        <header className="maintenance-header">
-          <span className="group-name">Nhom 8 - FE</span>
-          <a href="https://nhom8-fe.vercel.app" className="vercel-link">
-            https://nhom8-fe.vercel.app
-          </a>
-        </header>
+        <header className="maintenance-header"></header>
 
         {/* Phần Nội dung chính */}
         <main className="maintenance-main">
@@ -21,9 +16,8 @@ function App() {
             alt="Dự án đang được phát triển"
             className="maintenance-image"
           />
-          <h1 className="maintenance-title">
-            CHÚNG TÔI ĐANG XÂY DỰNG WEBSITE NÔNG SẢN!
-          </h1>
+          <h1 className="maintenance-title">CHÚNG TÔI ĐANG XÂY DỰNG WEBSITE!</h1>
+
           <p className="maintenance-subtitle">
             Dự án đang được phát triển, hãy quay lại sau!
           </p>
@@ -36,7 +30,7 @@ function App() {
         {/* Phần Chân trang (Liên hệ) */}
         <footer className="maintenance-footer">
           <p>Contact Us:</p>
-          <a href="mailto:support@nhom8nongsan.vn">support@nhom8nongsan.vn</a>
+          <a href="mailto:spfarm2home@gmail.com">spfarm2home@gmail.com</a>
         </footer>
       </div>
     </div>
