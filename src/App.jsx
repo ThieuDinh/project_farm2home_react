@@ -16,7 +16,7 @@ function App() {
             alt="Dự án đang được phát triển"
             className="maintenance-image"
           />
-          <h1 className="maintenance-title">CHÚNG TÔI ĐANG XÂY DỰNG WEBSITE!</h1>
+          <h1 className="maintenance-title">Đang load nhé mấy ní!!!</h1>
 
           <p className="maintenance-subtitle">
             Dự án đang được phát triển, hãy quay lại sau!
