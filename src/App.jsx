@@ -8,22 +8,12 @@ function App() {
   const [error, setError] = useState(null);
 
   // Gọi API ngay khi trang vừa load
-  useEffect(() => {
-    // BẮT BUỘC dùng https ở đây để không bị Vercel chặn
-    fetch('https://thieuw260204-001-site1.itempurl.com/users')
+ useEffect(() => {
+    fetch('/api/users') 
       .then(response => {
         if (!response.ok) throw new Error("Không thể kết nối đến API");
         return response.json();
       })
-      .then(data => {
-        setUsers(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("Lỗi:", err);
-        setError("Lỗi kết nối hoặc chứng chỉ SSL của Hosting tạm thời.");
-        setLoading(false);
-      });
   }, []);
 
   return (
