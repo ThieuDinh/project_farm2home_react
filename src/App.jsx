@@ -77,7 +77,7 @@ function App() {
           
           <div style={{ marginTop: '30px', background: '#fff', padding: '20px', borderRadius: '10px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', textAlign: 'left', color: '#000' }}>
             <h2 style={{ color: '#166534', borderBottom: '2px solid #16a34a', paddingBottom: '10px', marginBottom: '20px' }}>
-              🛠️ Quản lý Users (C.R.U.D)
+              🛠️ Quản lý Users 
             </h2>
             
             {/* Form Thêm User */}
