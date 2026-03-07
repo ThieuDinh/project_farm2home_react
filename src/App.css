@@ -1,129 +1,22 @@
-/* Tải Font chữ Inter từ Google Fonts cho hiện đại */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-html, body, #root {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.maintenance-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  /* Gradient màu xanh nhẹ nhàng, thân thiện với nông sản */
-  background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
-  color: #1f2937;
-  padding: 20px;
-}
-
-.maintenance-content {
-  max-width: 800px;
-  width: 100%;
-  text-align: center;
-}
-
-.maintenance-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 50px;
-  padding: 0 10px;
-}
-
-.group-name {
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: #166534; /* Màu xanh đậm hơn cho tên nhóm */
-}
-
-.vercel-link {
-  color: #16a34a; /* Màu xanh lá Vercel */
+.nav-link { margin: 0 10px; text-decoration: none; color: #fff; font-weight: bold; }
+.manage-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 25px;
+  background-color: #16a34a;
+  color: white;
   text-decoration: none;
-  font-weight: 600;
+  border-radius: 8px;
+  font-weight: bold;
 }
-
-.vercel-link:hover {
-  text-decoration: underline;
-}
-
-.maintenance-image {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 40px;
-  /* Hiệu ứng bóng đổ nhẹ cho hình ảnh */
-  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.05));
-}
-
-.maintenance-title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 15px;
-  color: #111827;
-}
-
-.maintenance-subtitle {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 25px;
-  color: #4b5563;
-}
-
-.maintenance-text {
-  font-size: 1.1rem;
-  color: #6b7280;
-  line-height: 1.6;
-}
-
-.maintenance-footer {
-  margin-top: 60px;
-  font-size: 1rem;
-  color: #9ca3af;
-}
-
-.maintenance-footer p {
-  margin-bottom: 5px;
-}
-
-.maintenance-footer a {
-  color: #166534;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.maintenance-footer a:hover {
-  text-decoration: underline;
-}
-
-/* Tối ưu hóa cho thiết bị di động */
-@media (max-width: 768px) {
-  .maintenance-title {
-    font-size: 1.75rem;
-  }
-
-  .maintenance-subtitle {
-    font-size: 1rem;
-  }
-
-  .maintenance-text {
-    font-size: 0.95rem;
-  }
-
-  .maintenance-header {
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 30px;
-  }
-}
+.user-page-container { text-align: left; padding: 20px; color: #000; }
+.crud-box { background: white; padding: 30px; border-radius: 12px; margin-top: 20px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+.add-form { display: flex; gap: 10px; margin-bottom: 25px; }
+.add-form input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 6px; }
+.add-form button { background: #2563eb; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; }
+table { width: 100%; border-collapse: collapse; }
+th { background: #16a34a; color: white; padding: 12px; }
+td { padding: 12px; border-bottom: 1px solid #eee; }
+.btn-edit { background: #f59e0b; color: white; border: none; padding: 5px 10px; border-radius: 4px; margin-right: 5px; cursor: pointer; }
+.btn-delete { background: #dc2626; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+.btn-save { background: #059669; color: white; border: none; padding: 5px 10px; border-radius: 4px; margin-right: 5px; cursor: pointer; }
