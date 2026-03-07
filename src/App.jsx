@@ -45,11 +45,11 @@ function App() {
           
           <div style={{ marginTop: '50px', background: '#fff', padding: '20px', borderRadius: '10px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', textAlign: 'left' }}>
             <h2 style={{ color: '#166534', borderBottom: '2px solid #16a34a', paddingBottom: '10px', marginBottom: '20px' }}>
-              📋 Danh sách Người dùng (Kết nối C# Web API thật)
+              📋 Danh sách Người dùng 
             </h2>
             
             {loading ? (
-              <p style={{color: '#f59e0b', fontWeight: 'bold'}}>⏳ Đang gọi API từ SmarterASP...</p>
+              <p style={{color: '#f59e0b', fontWeight: 'bold'}}>⏳ Đang gọi API </p>
             ) : error ? (
               <p style={{color: '#dc2626', fontWeight: 'bold'}}>❌ {error}</p>
             ) : (
