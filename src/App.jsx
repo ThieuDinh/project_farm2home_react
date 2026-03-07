@@ -1,17 +1,19 @@
+// Đường dẫn: src/App.jsx
+
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import constructionImg from './images/under_construction.png'; // Nhớ giữ nguyên hình ảnh cũ
+import constructionImg from './images/under_construction.png';
 
 function App() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Gọi API ngay khi trang vừa load
-useEffect(() => {
-    fetch('https://api.allorigins.win/raw?url=http://thieuw260204-001-site1.itempurl.com/users')
+  useEffect(() => {
+    // Gọi thẳng vào API Proxy của Vercel (Không còn lo lỗi CORS hay HTTPS)
+    fetch('/api/users')
       .then(response => {
-        if (!response.ok) throw new Error("Không thể kết nối đến API");
+        if (!response.ok) throw new Error("Không thể kết nối đến máy chủ");
         return response.json();
       })
       .then(data => {
@@ -20,7 +22,7 @@ useEffect(() => {
       })
       .catch(err => {
         console.error("Lỗi:", err);
-        setError("Lỗi kết nối đến máy chủ.");
+        setError("Lỗi kết nối hoặc chứng chỉ bảo mật.");
         setLoading(false);
       });
   }, []);
@@ -29,30 +31,25 @@ useEffect(() => {
     <div className="maintenance-container">
       <div className="maintenance-content">
         
-        {/* Phần Header cũ */}
         <header className="maintenance-header">
           <span className="group-name">Nhom 8 - FE</span>
-          <a href="https://nhom8-fe.vercel.app" className="vercel-link">
-            https://nhom8-fe.vercel.app
+          <a href="https://projectfarm2homereact.vercel.app" className="vercel-link" target="_blank" rel="noreferrer">
+            https://projectfarm2homereact.vercel.app
           </a>
         </header>
 
-        {/* Phần thông báo đang phát triển cũ */}
         <main className="maintenance-main">
           <img src={constructionImg} alt="Đang phát triển" className="maintenance-image" />
           <h1 className="maintenance-title">CHÚNG TÔI ĐANG XÂY DỰNG WEBSITE NÔNG SẢN!</h1>
           <p className="maintenance-subtitle">Dự án đang được phát triển, hãy quay lại sau!</p>
           
-          {/* =========================================
-              PHẦN THÊM MỚI: BẢNG CRUD USERS (Yêu cầu R)
-              ========================================= */}
           <div style={{ marginTop: '50px', background: '#fff', padding: '20px', borderRadius: '10px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', textAlign: 'left' }}>
             <h2 style={{ color: '#166534', borderBottom: '2px solid #16a34a', paddingBottom: '10px', marginBottom: '20px' }}>
-              📋 Danh sách Người dùng (Yêu cầu Read - Lấy từ API C#)
+              📋 Danh sách Người dùng (Kết nối C# Web API thật)
             </h2>
             
             {loading ? (
-              <p style={{color: '#f59e0b', fontWeight: 'bold'}}>⏳ Đang tải dữ liệu từ máy chủ SmarterASP...</p>
+              <p style={{color: '#f59e0b', fontWeight: 'bold'}}>⏳ Đang gọi API từ SmarterASP...</p>
             ) : error ? (
               <p style={{color: '#dc2626', fontWeight: 'bold'}}>❌ {error}</p>
             ) : (
@@ -74,8 +71,6 @@ useEffect(() => {
               </table>
             )}
           </div>
-          {/* ========================================= */}
-
         </main>
       </div>
     </div>
