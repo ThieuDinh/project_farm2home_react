@@ -5,7 +5,7 @@
 }
 
 .maintenance-header {
-  background: #10b981; /* Xanh lá tươi mới */
+  background: #00a151; /* Xanh lá tươi mới */
   padding: 1rem 10%;
   display: flex;
   justify-content: space-between;
@@ -36,7 +36,7 @@
 
 .manage-button {
   display: inline-block;
-  background: #10b981;
+  background: #00c04a;
   color: white;
   padding: 0.8rem 2rem;
   border-radius: 9999px;
@@ -91,7 +91,7 @@
 .add-form input:focus { border-color: #10b981; }
 
 .add-form button {
-  background: #10b981;
+  background: #10b951;
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
