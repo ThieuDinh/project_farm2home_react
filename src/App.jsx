@@ -59,7 +59,7 @@ const UserManagement = () => {
     <div className="user-page-container">
       <Link to="/" style={{ color: '#16a34a', textDecoration: 'none', fontWeight: 'bold' }}>← Quay lại Trang chủ</Link>
       <div className="crud-box">
-        <h2>🛠️ Hệ thống Quản lý Users (Database Thật)</h2>
+        <h2>🛠️ Quản lý Users </h2>
         <div className="add-form">
           <input type="text" placeholder="Nhập tên mới..." value={newName} onChange={(e) => setNewName(e.target.value)} />
           <button onClick={handleAddUser}>Thêm Mới</button>

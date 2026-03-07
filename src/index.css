@@ -1,12 +1,14 @@
 /* index.css */
-:root {
-  font-family: 'Inter', system-ui, sans-serif;
-  background-color: #f4f7f6; /* Màu nền xám nhạt dịu mắt */
-  color: #213547;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Giúp tính toán kích thước chuẩn hơn */
 }
 
 body {
-  margin: 0;
+  font-family: 'Inter', -apple-system, sans-serif;
+  background-color: #f8fafc;
+  color: #1e293b;
+  line-height: 1.6;
   min-height: 100vh;
-  display: block; /* Bỏ flex để layout tự nhiên hơn */
 }
