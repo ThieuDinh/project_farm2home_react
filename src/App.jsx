@@ -8,12 +8,21 @@ function App() {
   const [error, setError] = useState(null);
 
   // Gọi API ngay khi trang vừa load
- useEffect(() => {
-    fetch('http://thieuw260204-001-site1.ltempurl.com/users') 
+useEffect(() => {
+    fetch('https://api.allorigins.win/raw?url=http://thieuw260204-001-site1.itempurl.com/users')
       .then(response => {
         if (!response.ok) throw new Error("Không thể kết nối đến API");
         return response.json();
       })
+      .then(data => {
+        setUsers(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Lỗi:", err);
+        setError("Lỗi kết nối đến máy chủ.");
+        setLoading(false);
+      });
   }, []);
 
   return (
