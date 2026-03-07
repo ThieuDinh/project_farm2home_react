@@ -105,8 +105,8 @@ function App() {
           <header className="maintenance-header">
             <span className="group-name">Nhom 8 - FE</span>
             <nav>
-              <Link to="/" className="nav-link">Trang chủ</Link> | 
-              <Link to="/user" className="nav-link"> Quản lý User</Link>
+              <Link to="/" className="nav-link">Trang chủ</Link> 
+              
             </nav>
           </header>
 
