@@ -9,7 +9,7 @@ function App() {
 
   // Gọi API ngay khi trang vừa load
  useEffect(() => {
-    fetch('/api/users') 
+    fetch('http://thieuw260204-001-site1.ltempurl.com/users') 
       .then(response => {
         if (!response.ok) throw new Error("Không thể kết nối đến API");
         return response.json();
