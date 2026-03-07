@@ -8,8 +8,8 @@ const Home = () => (
   <div className="maintenance-main">
     <img src={constructionImg} alt="Đang phát triển" className="maintenance-image" />
     <h1 className="maintenance-title">CHÚNG TÔI ĐANG XÂY DỰNG WEBSITE NÔNG SẢN!</h1>
-    <p className="maintenance-subtitle">Vui lòng truy cập trang quản lý để kiểm tra dữ liệu.</p>
-    <Link to="/user" className="manage-button">Đi đến Trang Quản Lý User</Link>
+    
+    <Link to="/user" className="manage-button">Quản Lý User</Link>
   </div>
 );
 
