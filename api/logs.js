@@ -2,7 +2,7 @@
 export default async function handler(req, res) {
   // Thay pass của bạn vào đây
   const username = 'thieuw260204-001';
-  const password = 'MAT_KHAU_CUA_BAN'; 
+  const password = 'thieu2602'; 
   const base64Credentials = Buffer.from(`${username}:${password}`).toString('base64');
 
   try {
