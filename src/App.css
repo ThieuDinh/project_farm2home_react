@@ -144,7 +144,11 @@ tr:last-child td { border-bottom: none; }
                         padding: 1rem;
                             gap: 10px;
                               }
-
+.maintenance-image {
+      max-width: 80%; /* Giới hạn ảnh không quá 80% chiều rộng màn hình */
+          margin: 0 auto 20px; /* Căn giữa ảnh */
+            }
+}
                                 /* Thu nhỏ chữ ở trang chủ */
                                   .maintenance-title {
                                       font-size: 1.8rem;
