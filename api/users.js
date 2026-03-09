@@ -11,13 +11,14 @@ export default async function handler(req, res) {
   const targetUrl = id 
     ? `http://thieuw260204-001-site1.ltempurl.com/users/${id}`
     : `http://thieuw260204-001-site1.ltempurl.com/users`;
-
+const clientIp = req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || 'Không xác định';
   // Thiết lập phương thức (GET, POST, PUT, DELETE) y hệt như Frontend gửi lên
   const fetchOptions = {
     method: req.method,
     headers: {
       'Authorization': `Basic ${base64Credentials}`,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'X-Forwarded-For': clientIp
     }
   };
 
