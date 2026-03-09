@@ -95,7 +95,70 @@ const UserManagement = () => {
     </div>
   );
 };
+// --- TRANG NHẬT KÝ BÍ MẬT (/boss-only) ---
+const AdminLogs = () => {
+  const [logs, setLogs] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [passcode, setPasscode] = useState('');
 
+  const checkPassword = () => {
+    // Mã PIN bí mật của bạn là 2602 (Lấy theo ID của bạn)
+    if (passcode === '2602') {
+      setIsAuthenticated(true);
+      fetch('/api/logs').then(res => res.json()).then(data => setLogs(data));
+    } else {
+      alert("Mã PIN sai! Cảnh báo xâm nhập trái phép.");
+    }
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="maintenance-main" style={{ marginTop: '100px' }}>
+        <h2>Khu vực Tuyệt Mật 🕵️‍♂️</h2>
+        <input 
+          type="password" 
+          placeholder="Nhập mã PIN..." 
+          value={passcode} 
+          onChange={(e) => setPasscode(e.target.value)}
+          style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+        />
+        <button onClick={checkPassword} style={{ marginLeft: '10px', padding: '10px 20px', background: '#dc2626', color: '#fff', border: 'none', borderRadius: '5px' }}>Xác nhận</button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="user-page-container">
+      <Link to="/" style={{ color: '#dc2626', textDecoration: 'none', fontWeight: 'bold' }}>← Thoát vòng bí mật</Link>
+      <div className="crud-box" style={{ borderTop: '5px solid #dc2626' }}>
+        <h2 style={{ color: '#dc2626', borderColor: '#dc2626' }}>🚨 Lịch sử Hoạt động (Admin Only)</h2>
+        <table>
+          <thead>
+            <tr style={{ background: '#fef2f2' }}>
+              <th>Thời gian</th>
+              <th>Hành động</th>
+              <th>Chi tiết</th>
+            </tr>
+          </thead>
+          <tbody>
+            {logs.map(log => (
+              <tr key={log.id}>
+                <td style={{ color: '#64748b' }}>{new Date(log.createdAt).toLocaleString('vi-VN')}</td>
+                <td>
+                  <span style={{ 
+                    padding: '3px 8px', borderRadius: '12px', fontSize: '12px', color: 'white', fontWeight: 'bold',
+                    background: log.action === 'THÊM' ? '#10b981' : log.action === 'XÓA' ? '#ef4444' : '#f59e0b'
+                  }}>{log.action}</span>
+                </td>
+                <td style={{ fontWeight: '500' }}>{log.details}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
 // --- COMPONENT CHÍNH ---
 function App() {
   return (
@@ -113,6 +176,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/user" element={<UserManagement />} />
+            <Route path="/boss-only" element={<AdminLogs />} />
           </Routes>
         </div>
       </div>
