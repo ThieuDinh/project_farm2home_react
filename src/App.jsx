@@ -138,8 +138,10 @@ const AdminLogs = () => {
           <thead>
             <tr style={{ background: '#fef2f2' }}>
               <th>Thời gian</th>
+              <th>IP Người Dùng</th>
               <th>Hành động</th>
               <th>Chi tiết</th>
+
             </tr>
           </thead>
           <tbody>
