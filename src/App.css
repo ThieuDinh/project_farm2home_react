@@ -126,3 +126,54 @@ tr:last-child td { border-bottom: none; }
 .btn-edit { background: #f59e0b; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 0.3rem; cursor: pointer; margin-right: 0.5rem; }
 .btn-delete { background: #ef4444; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 0.3rem; cursor: pointer; }
 .btn-save { background: #10b981; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 0.3rem; cursor: pointer; margin-right: 0.5rem; }
+/* =========================================
+   BỔ SUNG RESPONSIVE CHO MOBILE & TABLET
+      ========================================= */
+
+      /* Bao bọc bảng để vuốt ngang trên điện thoại */
+      .table-responsive {
+        width: 100%;
+          overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* Giúp vuốt mượt trên iOS */
+            }
+
+            @media (max-width: 768px) {
+              /* Chỉnh lại Header cho gọn */
+                .maintenance-header {
+                    flex-direction: column;
+                        padding: 1rem;
+                            gap: 10px;
+                              }
+
+                                /* Thu nhỏ chữ ở trang chủ */
+                                  .maintenance-title {
+                                      font-size: 1.8rem;
+                                        }
+
+                                          .maintenance-main {
+                                              padding: 2rem 1rem;
+                                                }
+
+                                                  /* Chỉnh lại form thêm User: Dọc thay vì ngang */
+                                                    .add-form {
+                                                        flex-direction: column;
+                                                            gap: 10px;
+                                                              }
+
+                                                                .add-form input, 
+                                                                  .add-form button {
+                                                                      width: 100%; /* Trải dài 100% màn hình */
+                                                                        }
+
+                                                                          /* Thu nhỏ box quản lý */
+                                                                            .crud-box {
+                                                                                padding: 1.5rem;
+                                                                                  }
+
+                                                                                    /* Các nút trong bảng nhỏ lại một chút */
+                                                                                      .btn-edit, .btn-save, .btn-delete {
+                                                                                          padding: 0.3rem 0.6rem;
+                                                                                              font-size: 0.85rem;
+                                                                                                  margin-bottom: 5px; /* Tránh các nút dính vào nhau khi rớt dòng */
+                                                                                                    }
+                                                                                                    }

@@ -65,6 +65,7 @@ const UserManagement = () => {
           <button onClick={handleAddUser}>Thêm Mới</button>
         </div>
         {loading ? <p>⏳ Đang tải dữ liệu từ SQL Server...</p> : (
+          <div className="table-responsive">
           <table>
             <thead>
               <tr><th>ID</th><th>Họ và Tên</th><th>Hành động</th></tr>
@@ -90,6 +91,7 @@ const UserManagement = () => {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
     </div>
