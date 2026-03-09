@@ -102,12 +102,31 @@ const AdminLogs = () => {
   const [logs, setLogs] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passcode, setPasscode] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const checkPassword = () => {
-    // Mã PIN bí mật của bạn là 2602 (Lấy theo ID của bạn)
+  cconst checkPassword = () => {
     if (passcode === '2602') {
       setIsAuthenticated(true);
-      fetch('/api/logs').then(res => res.json()).then(data => setLogs(data));
+      setIsLoading(true);
+      
+      fetch('/api/logs')
+        .then(res => res.json())
+        .then(data => {
+          // Lớp áo giáp: Chỉ in ra bảng nếu data là mảng, nếu không thì gán mảng rỗng
+          if (Array.isArray(data)) {
+            setLogs(data);
+          } else {
+            console.error("API trả về lỗi:", data);
+            setLogs([]); 
+            alert("Lỗi: Sai mật khẩu hoặc API chưa hoạt động!");
+          }
+          setIsLoading(false);
+        })
+        .catch(err => {
+          console.error("Lỗi mạng:", err);
+          setLogs([]);
+          setIsLoading(false);
+        });
     } else {
       alert("Mã PIN sai! Cảnh báo xâm nhập trái phép.");
     }
@@ -134,31 +153,37 @@ const AdminLogs = () => {
       <Link to="/" style={{ color: '#dc2626', textDecoration: 'none', fontWeight: 'bold' }}>← Thoát vòng bí mật</Link>
       <div className="crud-box" style={{ borderTop: '5px solid #dc2626' }}>
         <h2 style={{ color: '#dc2626', borderColor: '#dc2626' }}>🚨 Lịch sử Hoạt động (Admin Only)</h2>
-        <table>
-          <thead>
-            <tr style={{ background: '#fef2f2' }}>
-              <th>Thời gian</th>
-              <th>IP Người Dùng</th>
-              <th>Hành động</th>
-              <th>Chi tiết</th>
-
-            </tr>
-          </thead>
-          <tbody>
-            {logs.map(log => (
-              <tr key={log.id}>
-                <td style={{ color: '#64748b' }}>{new Date(log.createdAt).toLocaleString('vi-VN')}</td>
-                <td>
-                  <span style={{ 
-                    padding: '3px 8px', borderRadius: '12px', fontSize: '12px', color: 'white', fontWeight: 'bold',
-                    background: log.action === 'THÊM' ? '#10b981' : log.action === 'XÓA' ? '#ef4444' : '#f59e0b'
-                  }}>{log.action}</span>
-                </td>
-                <td style={{ fontWeight: '500' }}>{log.details}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        
+        {isLoading ? <p>⏳ Đang tải dữ liệu mật...</p> : (
+          <div className="table-responsive">
+            <table>
+              <thead>
+                <tr style={{ background: '#fef2f2' }}>
+                  <th>Thời gian</th>
+                  <th>IP Người Dùng</th>
+                  <th>Hành động</th>
+                  <th>Chi tiết</th>
+                </tr>
+              </thead>
+              <tbody>
+                {logs?.map(log => (
+                  <tr key={log.id}>
+                    <td style={{ color: '#64748b' }}>{new Date(log.createdAt).toLocaleString('vi-VN')}</td>
+                    {/* Đã bổ sung cột IP bị thiếu */}
+                    <td style={{ fontWeight: 'bold', color: '#0369a1' }}>{log.ipAddress || 'Ẩn danh'}</td>
+                    <td>
+                      <span style={{ 
+                        padding: '3px 8px', borderRadius: '12px', fontSize: '12px', color: 'white', fontWeight: 'bold',
+                        background: log.action === 'THÊM' ? '#10b981' : log.action === 'XÓA' ? '#ef4444' : '#f59e0b'
+                      }}>{log.action}</span>
+                    </td>
+                    <td style={{ fontWeight: '500' }}>{log.details}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
