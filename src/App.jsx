@@ -104,7 +104,7 @@ const AdminLogs = () => {
   const [passcode, setPasscode] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  cconst checkPassword = () => {
+  const checkPassword = () => {
     if (passcode === '2602') {
       setIsAuthenticated(true);
       setIsLoading(true);
