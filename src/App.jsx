@@ -9,7 +9,17 @@ const Home = () => (
     <img src={constructionImg} alt="Đang phát triển" className="maintenance-image" />
     <h1 className="maintenance-title">CHÚNG TÔI ĐANG XÂY DỰNG WEBSITE NÔNG SẢN!</h1>
     
-    <Link to="/user" className="manage-button">Quản Lý User</Link>
+    <div className="hero-buttons-container">
+      <Link to="/user" className="manage-button">Quản Lý User</Link>
+      <a 
+        href="http://thieuw260204-001-site1.ltempurl.com/users" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="btn-api" 
+      >
+        Xem API Backend (JSON)
+      </a>
+    </div>
   </div>
 );
 
@@ -197,8 +207,16 @@ function App() {
           <header className="maintenance-header">
             <span className="group-name">Nhom 8 - FE</span>
             <nav>
-              
-              
+              <Link to="/" className="nav-link">Trang chủ</Link>
+              <Link to="/user" className="nav-link">Quản lý User</Link>
+              <a 
+                href="http://thieuw260204-001-site1.ltempurl.com/users" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="nav-link-api"
+              >
+                API Backend
+              </a>
             </nav>
           </header>
 

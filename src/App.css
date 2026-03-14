@@ -223,3 +223,52 @@ tr:last-child td {
   margin-bottom: 5px;
   /* Tránh các nút dính vào nhau khi rớt dòng */
 }
+nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Nút API trên thanh Menu: Viền vàng nổi bật */
+.nav-link-api {
+  color: #fef08a; 
+  text-decoration: none;
+  font-weight: bold;
+  border: 1px solid #fef08a;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.nav-link-api:hover {
+  background-color: #fef08a;
+  color: #00a151; /* Đổi màu chữ thành xanh khi hover */
+}
+
+/* Khung chứa 2 nút ở trang chủ */
+.hero-buttons-container {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+/* Nút xem API Backend màu xanh dương đậm chất công nghệ */
+.btn-api {
+  display: inline-block;
+  background: #2563eb;
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-api:hover {
+  transform: translateY(-2px);
+  background: #1d4ed8;
+  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
+}
