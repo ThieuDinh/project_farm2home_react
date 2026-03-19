@@ -39,6 +39,7 @@ const ProductCategories = () => {
           {categories.map((category) => (
             <CategoryCard 
               key={category.id}
+              id={category.id}
               title={category.title}
               description={category.description}
               imageSrc={category.imageSrc}
