@@ -6,7 +6,7 @@ const StorySection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="lg:w-1/2">
-            <img alt="Cánh đồng nông sản" className="rounded-lg shadow-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg7OzlB2a478p0p-9BARBLdXAfEGRzPsloZUHiPEQ2VHK1n_E17F4pU1DDvF_FBX7ItkhNUGf6JaZOevgXooYy3cd40Z3K7XpKkOoU5cItOYEABdOvLE-Gslk5hlTzo-46f3BUxjl6apEEZq6V0APH0Sc0CtBg7-shfcO9bJEYS_GAUs39DVP-qLe_51IPPTe4sswdI_CzQyLL7PUnBJaR9Q-R7pj_C3mg1DwP4gmmHTPI18ERKVuK9VK6FBxv1rhWh4eC8T-UZnM" />
+            <img alt="Cánh đồng nông sản" className="rounded-lg shadow-2xl" src="https://prod-langfarm-bucketstack-bucketd7feb781-f2iejaoup3ga.s3.amazonaws.com/images/1746849206915_CP7A4384_XL.jpg" />
           </div>
           <div className="lg:w-1/2">
             <h2 className="text-3xl font-bold mb-6 text-green-600">Câu chuyện của chúng tôi</h2>

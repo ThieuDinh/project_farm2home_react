@@ -7,21 +7,21 @@ const ProductCategories = () => {
       id: 1,
       title: "Mứt hoa quả",
       description: "Hương vị ngọt ngào từ trái cây tươi được cô đọng một cách tinh tế.",
-      imageSrc: "https://lh3.googleusercontent.com/aida-public/AB6AXuAQWZQPZPN9itnfMsLwbHk2aR4qvnDrQSrjEjIv4ghFATR8FNuJdMJkaPb9Y4hQG9EVlXIK9H9j8-hgrtm57VxPUQNRnv1c96JL8jhA0-ByU26mO9PO9BJBSIQQugx1ROu-3MlfWjOc2JyE8-5AsZrf5E-KWCSO2WnKaAGfPY-kO3ScqvNRhgMTTck5cPU7AicAs50cpwnoYZXpLvEAwwdLOFiJs8zi70pbRtBuLvtDYL26Yu7YafEXbX2oRIaNRBSPQOydc4LH9dE", // Đổi link
+      imageSrc: "https://prod-langfarm-bucketstack-bucketd7feb781-f2iejaoup3ga.s3.amazonaws.com/images/1763448346761_CP7A6469_XL.jpg",
       styleClass: "bg-green-50"
     },
     {
       id: 2,
       title: "Trái cây sấy",
       description: "Giữ trọn vẹn vitamin và vị ngon nguyên bản của từng loại trái cây.",
-      imageSrc: "https://lh3.googleusercontent.com/aida-public/AB6AXuA-3PDvManhWppcs_v6AfXo1n_5VxKIvkzBMxhjNVwq-admCvaLUbtoZBFJ9LIe5WtsR3lWCVHPoLUM3ELzyR4gm5JPu4TlGxI7tFmY6CG-otmlbSduhTkdCQXGIDeyiK7JVqZIpPRrOOfWXq_NO7wkEhTQp-cgZE5NsiYD9irYFBOYXkW4PaHpH3jcYzcyRYxP5fwHrHr2qGqxMlvkm8VqWAKm3FjaWAQd9HS6LZ2aoirjuujqR9qn5u2GAogVo380S8NoeWfQtIc",
+      imageSrc: "https://prod-langfarm-bucketstack-bucketd7feb781-f2iejaoup3ga.s3.amazonaws.com/images/1727756229709_1000994___Khoai_lang_tim_say_gion__90g__hu__mau_tobita__Langfarm___00001_XL.jpg",
       styleClass: "bg-white border border-gray-100"
     },
     {
       id: 3,
       title: "Hạt dinh dưỡng",
       description: "Nguồn năng lượng lành mạnh và dồi dào cho sức khỏe mỗi ngày.",
-      imageSrc: "https://lh3.googleusercontent.com/aida-public/AB6AXuD2pBL_iH105ylq9AfLB5oyg9xkT_ePQPxyqeGl7X0VJSVVh4bSOi2DL2nItoXsw-PPs3hZpR66NMemQR6fuY95XUoKSQ7FNZX9k9IpsEb6y4ts6P2siGAjUJF1nJ2irzJmSCrPMZgVB3Ag0lqFHy0eIRP_Gww4DWExih82bT3JD9qPSe9a25wYJ6BvIYXP1VV9b23HoKJgE8PL0lDGRKKVlwowcCqbItReNs7_1nGmwYFV1pSyfbonv1qVLrvuD6HoD05Mxa9aT5U",
+      imageSrc: "https://prod-langfarm-bucketstack-bucketd7feb781-f2iejaoup3ga.s3.amazonaws.com/images/1728964420286_1000947___Hanh_nhan_rang_muoi_bien__240g__hu__mau_tobita__Langfarm___00001_XL.jpg",
       styleClass: "bg-green-50"
     }
   ];
