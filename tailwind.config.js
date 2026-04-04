@@ -1,26 +1,32 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  darkMode: 'class',
+module.exports = {
+  // Khai báo các file chứa class Tailwind để nó quét và tạo CSS
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./public/index.html"
   ],
   theme: {
     extend: {
+      // Bê y nguyên các màu sắc bạn đã tự định nghĩa từ HTML sang đây
       colors: {
-        brand: {
-          dark: '#0a0c10',
-          green: '#22c55e',
-          'green-dark': '#166534',
-          accent: '#3b82f6',
-        }
+        primary: '#76a375',
+        'primary-dark': '#5d825c',
+        'primary-light': '#f0f7f0',
+        brandGray: '#5c5750',
       },
+      // Cấu hình font chữ mặc định
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['Montserrat', 'sans-serif'],
+        sans: ['Plus Jakarta Sans', 'sans-serif'],
+      },
+      // Cấu hình border radius custom
+      borderRadius: {
+        'custom': '8px',
       }
     }
   },
-  plugins: [],
+  plugins: [
+    // Nếu bạn có dùng plugins forms hay container-queries thì cài đặt qua npm và thêm vào đây
+    // require('@tailwindcss/forms'),
+    // require('@tailwindcss/container-queries'),
+  ],
 }
-
