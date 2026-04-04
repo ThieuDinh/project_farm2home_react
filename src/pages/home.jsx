@@ -49,7 +49,7 @@ const Home = () => {
     <div className="bg-[#fafafa] dark:bg-gray-900 text-gray-800 dark:text-white">
 
       {/* ===== HEADER ===== */}
-      <Header />
+     
 
       {/* ===== HERO ===== */}
       <Hero />
@@ -62,6 +62,7 @@ const Home = () => {
           <div className="relative aspect-[16/6] overflow-hidden rounded-2xl shadow-lg">
             <img
               src={banners[index]}
+              alt={`Banner ${index + 1}`}
               className="w-full h-full object-cover transition duration-700"
             />
 
@@ -151,6 +152,7 @@ const Home = () => {
               <div className="overflow-hidden rounded-t-2xl">
                 <img
                   src={sp.img}
+                  alt={sp.name}
                   className="w-full h-40 object-cover group-hover:scale-110 transition"
                 />
               </div>
@@ -190,7 +192,7 @@ const Home = () => {
       </section>
 
       {/* ===== FOOTER ===== */}
-      <Footer />
+     
     </div>
   );
 };
