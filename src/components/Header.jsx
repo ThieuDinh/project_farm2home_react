@@ -50,12 +50,12 @@ const Header = () => {
           >
             Trang chủ
           </a>
-          <a
+          <Link
             className="text-sm font-bold tracking-wide hover:text-[#76a375] transition-colors"
-            href="#san-pham"
+            to="/products"
           >
             Sản phẩm
-          </a>
+          </Link>
           <a
             className="text-sm font-bold tracking-wide hover:text-[#76a375] transition-colors"
             href="#cau-chuyen"

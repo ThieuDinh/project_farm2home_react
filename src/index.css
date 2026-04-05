@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,11 +11,15 @@
 }
 
 body {
-  font-family: 'Inter', -apple-system, sans-serif;
+  font-family: 'Outfit', sans-serif;
   background-color: #f8fafc;
   color: #1e293b;
   line-height: 1.6;
   min-height: 100vh;
+}
+
+h1, h2, h3, .font-serif {
+  font-family: 'Playfair Display', serif;
 }
 
 /* Các class tuỳ chỉnh từ giao diện Tailwind cũ của bạn */
@@ -29,13 +34,22 @@ body {
 }
 
 .glass-morphism {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 }
 
 .gradient-text {
-  background: linear-gradient(to right, #ffffff, #22c55e);
+  background: linear-gradient(135deg, #ffffff 0%, #22c55e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.premium-shadow {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+}
+
+.section-padding {
+  padding: clamp(4rem, 10vw, 8rem) 1.5rem;
 }

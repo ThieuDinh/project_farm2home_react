@@ -1,198 +1,176 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import ProductCategories from "../components/ProductCategories";
 import StorySection from "../components/StorySection";
 import Footer from "../components/Footer";
-
-// IMPORT ẢNH
-import banner1 from "../assets/Banner1.png";
-import banner2 from "../assets/Banner2.png";
-import banner3 from "../assets/Banner3.png";
-import banner4 from "../assets/Banner4.png";
-
-import sp1 from "../assets/Noibat1.png";
-import sp2 from "../assets/Noibat2.png";
-import sp3 from "../assets/Noibat3.png";
-import sp4 from "../assets/Noibat4.png";
-import sp5 from "../assets/Noibat5.png";
-import sp6 from "../assets/hong.jpg";
-import sp7 from "../assets/xoai.jpg";
-import sp8 from "../assets/mit.png";
+import { fetchFeaturedProducts } from "../api";
+import { getProductImage } from "../productImages";
 
 const Home = () => {
-  const banners = [banner1, banner2, banner3, banner4];
-  const [index, setIndex] = useState(0);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // auto slide
+  // Lấy sản phẩm nổi bật từ API
   useEffect(() => {
-    const auto = setInterval(() => {
-      setIndex((prev) => (prev + 1) % banners.length);
-    }, 4000);
-    return () => clearInterval(auto);
+    fetchFeaturedProducts(10)
+      .then((data) => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Lỗi tải sản phẩm nổi bật:", err);
+        setLoading(false);
+      });
   }, []);
 
-  // products
-  const products = [
-    { img: sp1, name: "Táo đỏ sấy", price: "120.000đ" },
-    { img: sp2, name: "Hạnh nhân", price: "150.000đ" },
-    { img: sp3, name: "Hạt mix cao cấp", price: "180.000đ" },
-    { img: sp4, name: "Hạt chia", price: "90.000đ" },
-    { img: sp5, name: "Macca", price: "200.000đ" },
-    { img: sp6, name: "Hồng sấy", price: "110.000đ" },
-    { img: sp7, name: "Xoài sấy", price: "100.000đ" },
-    { img: sp8, name: "Mít sấy", price: "80.000đ" },
-  ];
-
   return (
-    <div className="bg-[#fafafa] dark:bg-gray-900 text-gray-800 dark:text-white">
-
-      {/* ===== HEADER ===== */}
-     
-
-      {/* ===== HERO ===== */}
+    <div className="bg-white text-gray-900 border-t border-gray-100 font-sans">
+      {/* ===== HERO SECTION ===== */}
       <Hero />
 
-      {/* ===== SLIDER BANNER XỊN (FIX SIZE) ===== */}
-      <section className="py-10 px-6">
-        <div className="max-w-6xl mx-auto relative">
-
-          {/* IMAGE */}
-          <div className="relative aspect-[16/6] overflow-hidden rounded-2xl shadow-lg">
-            <img
-              src={banners[index]}
-              alt={`Banner ${index + 1}`}
-              className="w-full h-full object-cover transition duration-700"
-            />
-
-            {/* overlay */}
-            <div className="absolute inset-0 bg-black/20"></div>
-
-            {/* text */}
-            <div className="absolute bottom-4 left-6 text-white">
-              <h3 className="text-xl font-bold">Nông sản sạch</h3>
-              <p className="text-sm">Chất lượng cao - giao tận nhà</p>
-            </div>
-
-            {/* BUTTON PREV */}
-            <button
-              onClick={() =>
-                setIndex((prev) =>
-                  prev === 0 ? banners.length - 1 : prev - 1
-                )
-              }
-              className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white p-2 rounded-full shadow"
-            >
-              ◀
-            </button>
-
-            {/* BUTTON NEXT */}
-            <button
-              onClick={() =>
-                setIndex((prev) => (prev + 1) % banners.length)
-              }
-              className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white p-2 rounded-full shadow"
-            >
-              ▶
-            </button>
-          </div>
-
-          {/* DOT */}
-          <div className="flex justify-center gap-2 mt-4">
-            {banners.map((_, i) => (
-              <div
-                key={i}
-                onClick={() => setIndex(i)}
-                className={`w-3 h-3 rounded-full cursor-pointer transition ${
-                  i === index ? "bg-green-500 scale-110" : "bg-gray-300"
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== FEATURES ===== */}
-      <section className="py-14 px-6">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
+      {/* ===== FEATURE HIGHLIGHTS ===== */}
+      <section className="py-32 px-4 sm:px-6 lg:px-8 bg-white relative z-10 -mt-20 rounded-t-[3rem] shadow-[0_-20px_50px_rgba(0,0,0,0.05)]">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 text-center">
           {[
-            "🌱 Nông trại sạch",
-            "🚚 Giao nhanh 2H",
-            "💎 Chất lượng cao cấp",
+            { icon: "🌱", title: "Nông trại sạch", desc: "Đạt chuẩn hữu cơ & VietGAP từ tinh hoa đất mẹ" },
+            { icon: "🚚", title: "Giao nhanh 2H", desc: "Đảm bảo độ tươi ngon nhất khi đến tay bạn" },
+            { icon: "💎", title: "Giá trị thực", desc: "Kết nối trực tiếp, minh bạch và tận tâm" },
           ].map((item, i) => (
-            <div
-              key={i}
-              className="p-6 rounded-2xl bg-white dark:bg-gray-800 shadow hover:shadow-xl hover:-translate-y-2 transition"
-            >
-              <h3 className="text-lg font-bold mb-2">{item}</h3>
-              <p className="text-gray-500 text-sm">
-                Sản phẩm đạt chuẩn an toàn, giao tận nơi nhanh chóng.
-              </p>
+            <div key={i} className="group space-y-6 p-10 rounded-[3rem] hover:bg-stone-50 transition-all duration-700 hover:shadow-xl border border-transparent hover:border-stone-100">
+              <div className="text-6xl transform group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-700 mb-4">{item.icon}</div>
+              <h3 className="text-3xl font-black text-gray-900 leading-tight tracking-tight">{item.title}</h3>
+              <p className="text-gray-500 font-medium text-lg">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ===== DANH MỤC ===== */}
-      <ProductCategories />
-
-      {/* ===== PRODUCT SLIDER ===== */}
-      <section className="py-16 px-6 bg-gray-50 dark:bg-gray-800">
-        <h2 className="text-2xl font-bold text-center mb-8">
-          🔥 Sản phẩm nổi bật
-        </h2>
-
-        <div className="flex gap-5 overflow-x-auto pb-4">
-          {products.map((sp, i) => (
-            <div
-              key={i}
-              className="min-w-[220px] bg-white dark:bg-gray-900 rounded-2xl shadow hover:shadow-xl hover:-translate-y-2 transition group"
-            >
-              <div className="overflow-hidden rounded-t-2xl">
-                <img
-                  src={sp.img}
-                  alt={sp.name}
-                  className="w-full h-40 object-cover group-hover:scale-110 transition"
-                />
-              </div>
-
-              <div className="p-4">
-                <h4 className="font-semibold">{sp.name}</h4>
-
-                <p className="text-green-500 font-bold mt-1">
-                  {sp.price}
-                </p>
-
-                <button className="mt-3 w-full py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition text-sm">
-                  🛒 Thêm vào giỏ
-                </button>
+      {/* =====cta SECTION (Replaced Slider) ===== */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-stone-50 overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="relative aspect-[21/7] overflow-hidden rounded-[4rem] shadow-2xl group border-[12px] border-white ring-1 ring-black/5">
+            <img
+              src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2000&auto=format&fit=crop"
+              alt="Fresh Produce"
+              className="w-full h-full object-cover transition-all duration-1000 transform group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-16">
+              <div className="text-white space-y-4">
+                <h3 className="text-5xl font-black tracking-tighter">Ưu đãi mùa vụ</h3>
+                <p className="text-xl font-medium opacity-90">Giảm đến 30% cho các sản phẩm nông sản sạch trong tuần này.</p>
               </div>
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
-      {/* ===== STORY ===== */}
+      {/* ===== CATEGORIES SECTION ===== */}
+      <div id="san-pham-noi-bat" className="pt-12">
+        <ProductCategories />
+      </div>
+
+      {/* ===== FEATURED PRODUCTS SLIDER ===== */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-stone-50 overflow-hidden">
+        <div className="max-w-7xl mx-auto space-y-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-l-[12px] border-green-500 pl-10">
+            <div className="space-y-4">
+              <h2 className="text-5xl md:text-7xl font-black text-gray-900 tracking-tighter leading-none">
+                Sản phẩm <br />
+                <span className="text-green-600 font-serif italic font-normal">tuyển chọn</span>
+              </h2>
+              <p className="text-gray-400 text-xl font-medium max-w-lg">Những tinh hoa nông sản được yêu thích nhất trong tuần qua.</p>
+            </div>
+            <Link to="/products" className="group text-green-600 font-black text-xl flex items-center gap-2 hover:gap-4 transition-all">
+              Tất cả sản phẩm 
+              <span className="text-2xl">→</span>
+            </Link>
+          </div>
+
+          <div className="flex gap-8 overflow-x-auto pb-10 scrollbar-hide snap-x px-4 -mx-4 md:px-0 md:mx-0">
+            {loading ? (
+              [...Array(4)].map((_, i) => (
+                <div key={i} className="min-w-[300px] h-96 bg-gray-200 animate-pulse rounded-[2.5rem]" />
+              ))
+            ) : (
+              products.map((sp) => (
+                <Link
+                  to={`/product/${sp.id}`}
+                  key={sp.id}
+                  className="min-w-[280px] md:min-w-[320px] bg-white rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-500 group snap-center flex flex-col border border-gray-100 overflow-hidden"
+                >
+                  <div className="relative h-64 overflow-hidden bg-stone-100">
+                    <img
+                      src={getProductImage(sp.image)}
+                      alt={sp.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur text-green-600 text-xs font-black px-4 py-1.5 rounded-full shadow-sm">
+                      {sp.categoryName || "Đặc sản"}
+                    </div>
+                  </div>
+
+                  <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <h4 className="text-xl font-bold text-gray-900 line-clamp-2 leading-tight group-hover:text-green-600 transition-colors">
+                      {sp.name}
+                    </h4>
+
+                    <div className="flex items-center justify-between">
+                      <p className="text-2xl font-black text-red-600 tracking-tight">
+                        {sp.price.toLocaleString("vi-VN")} ₫
+                        <span className="text-xs text-gray-400 font-bold ml-1 uppercase">/ {sp.unit || "Bịch"}</span>
+                      </p>
+                      <button 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          alert(`Đã thêm ${sp.name} vào giỏ!`);
+                        }}
+                        className="p-3 bg-green-50 text-green-600 rounded-2xl hover:bg-green-600 hover:text-white transition-all duration-300 shadow-sm"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </Link>
+              ))
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== BRAND STORY SECTION ===== */}
       <StorySection />
 
-      {/* ===== CTA ===== */}
-      <section className="py-20 text-center px-6">
-        <h2 className="text-3xl font-bold mb-4">
-          Trải nghiệm mua sắm hiện đại
-        </h2>
+      {/* ===== FINAL CALL TO ACTION ===== */}
+      <section className="py-24 px-4 bg-green-600 relative overflow-hidden">
+        {/* Background blobs for visual interest */}
+        <div className="absolute -top-10 -left-10 w-64 h-64 bg-green-500/50 rounded-full blur-3xl opacity-50" />
+        <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-green-400/50 rounded-full blur-3xl opacity-50" />
 
-        <p className="text-gray-500 mb-6">
-          Nhanh hơn – đẹp hơn – tiện lợi hơn
-        </p>
+        <div className="relative max-w-4xl mx-auto text-center space-y-10 z-10">
+          <h2 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tighter italic">
+            "Trải nghiệm nông sản <br /> của ngày hôm nay."
+          </h2>
 
-        <button className="px-8 py-3 bg-green-500 text-white rounded-full hover:scale-105 hover:bg-green-600 transition shadow">
-          Bắt đầu ngay 🚀
-        </button>
+          <p className="text-green-50 text-xl font-medium tracking-tight">
+            Nhanh hơn – Đẹp hơn – Chất lượng hơn. Kết nối trực tiếp từ trái tim người nông dân đến bữa cơm gia đình bạn.
+          </p>
+
+          <Link
+            to="/products"
+            className="inline-flex items-center justify-center px-12 py-5 bg-white text-green-700 font-black text-2xl rounded-[2rem] hover:bg-stone-50 transition-all duration-300 transform hover:scale-105 shadow-2xl"
+          >
+            Bắt đầu khám phá ngay 🚀
+          </Link>
+        </div>
       </section>
 
-      {/* ===== FOOTER ===== */}
-     
+      {/* Space before footer */}
+      <div className="h-20" />
     </div>
   );
 };
