@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import productCanvas from '../images/product_canvas.jpg';
+import { getSiteImage } from '../productImages';
 
 const Hero = () => {
+  const productCanvas = getSiteImage('product_canvas.jpg');
+
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-stone-900 font-sans">
       {/* Background with parallax-like effect and overlay */}

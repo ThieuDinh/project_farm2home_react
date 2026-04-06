@@ -1,27 +1,12 @@
 // ============================================================
 // src/productImages.js
-// Dùng Vite's import.meta.glob để load tất cả ảnh trong
-// src/assets/products/ và tạo một map: tênFile → URL thật
-//
-// Cách dùng trong component:
-//   import { getProductImage } from '../productImages';
-//   <img src={getProductImage(product.image)} />
+// Lấy ảnh trực tiếp từ Backend API (Static Files)
 // ============================================================
 
-// Lazy load tất cả ảnh (Vite sẽ hash và optimize chúng khi build)
-const imageModules = import.meta.glob('./assets/products/*.{jpg,jpeg,png,webp,JPG,PNG}', {
-  eager: true,
-  import: 'default',
-});
-
-// Tạo map: "tênFile" → "URL đã được Vite xử lý"
-// VD: "1727689993651_Bap_rang_toi_ot.jpg" → "/assets/1727689993651_Bap_rang.a3b2c1.jpg"
-const imageMap = {};
-for (const path in imageModules) {
-  // path = "./assets/products/1727689993651_Bap_rang.jpg"
-  const fileName = path.split('/').pop(); // lấy phần tên file
-  imageMap[fileName] = imageModules[path];
-}
+// URL gốc của ảnh trên backend
+const BASE_URL = 'http://localhost:5163/images';
+export const BASE_IMAGE_URL = `${BASE_URL}/products`;
+export const BASE_SITE_URL = `${BASE_URL}/site`;
 
 // Ảnh fallback khi không tìm thấy
 const FALLBACK_IMAGE =
@@ -30,7 +15,7 @@ const FALLBACK_IMAGE =
 /**
  * Resolve tên file ảnh từ DB thành URL hiển thị được
  * - Nếu image là URL đầy đủ (http...) → trả về nguyên vẹn
- * - Nếu image là tên file → tìm trong imageMap
+ * - Nếu image là tên file → nối với BASE_IMAGE_URL
  * - Nếu không tìm thấy → trả về FALLBACK_IMAGE
  *
  * @param {string} image - Tên file hoặc URL đầy đủ từ DB
@@ -44,19 +29,23 @@ export const getProductImage = (image) => {
     return image;
   }
 
-  // Nếu là tên file → tìm trong map ảnh local
-  const found = imageMap[image];
-  if (found) return found;
+  // Trả về URL từ backend
+  return `${BASE_IMAGE_URL}/${image}`;
+};
 
-  // Không tìm thấy → fallback
-  console.warn(`[productImages] Không tìm thấy ảnh: "${image}"`);
-  return FALLBACK_IMAGE;
+/**
+ * Lấy URL ảnh hệ thống (logo, hero, vv.) từ backend
+ * @param {string} fileName - Tên file ảnh (VD: "logo.png")
+ * @returns {string}
+ */
+export const getSiteImage = (fileName) => {
+  return `${BASE_SITE_URL}/${fileName}`;
 };
 
 /**
  * Lấy danh sách tất cả tên file ảnh có sẵn (để debug hoặc seed DB)
  * @returns {string[]}
  */
-export const getAvailableImageNames = () => Object.keys(imageMap);
+export const getAvailableImageNames = () => [];
 
-export default imageMap;
+export default getProductImage;

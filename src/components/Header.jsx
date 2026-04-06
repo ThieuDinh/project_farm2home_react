@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { getSiteImage } from '../productImages';
 const Header = () => {
+  const logo = getSiteImage('logo.png');
   const location = useLocation();
   const [user, setUser] = useState(null);
 
@@ -37,7 +39,7 @@ const Header = () => {
             <img
               alt="Farm2Home Logo"
               className="h-12 w-auto object-contain"
-              src="/src/images/logo.png"
+              src={logo}
             />
           </a>
         </div>
