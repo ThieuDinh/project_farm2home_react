@@ -1,10 +1,7 @@
-// ============================================================
-// src/productImages.js
-// Lấy ảnh trực tiếp từ Backend API (Static Files)
-// ============================================================
+import { BASE_URL as API_BASE_URL } from './api';
 
 // URL gốc của ảnh trên backend
-const BASE_URL = 'http://localhost:5163/images';
+const BASE_URL = `${API_BASE_URL}/images`;
 export const BASE_IMAGE_URL = `${BASE_URL}/products`;
 export const BASE_SITE_URL = `${BASE_URL}/site`;
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { BASE_URL } from "../api";
 const ProfilePage = () => {
   // --- STATE QUẢN LÝ DỮ LIỆU ---
   const [profile, setProfile] = useState({
@@ -46,7 +47,7 @@ const ProfilePage = () => {
 
       try {
         setIsLoading(true);
-        const response = await axios.get("http://localhost:5163/user/profile", {
+        const response = await axios.get(`${BASE_URL}/user/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -163,7 +164,7 @@ const ProfilePage = () => {
       setMessage({ type: "", text: "" });
 
       const response = await axios.put(
-        "http://localhost:5163/user/profile",
+        `${BASE_URL}/user/profile`,
         profile,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -205,7 +206,7 @@ const ProfilePage = () => {
       setMessage({ type: "", text: "" });
 
       const response = await axios.put(
-        "http://localhost:5163/user/change-password",
+        `${BASE_URL}/user/change-password`,
         {
           currentPassword: passwords.currentPassword,
           newPassword: passwords.newPassword,

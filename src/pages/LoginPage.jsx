@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import FacebookLogin from "@greatsumini/react-facebook-login";
 import axios from "axios";
+import { BASE_URL } from "../api";
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ const LoginPage = () => {
     try {
       console.log(`Đang đăng nhập bằng ${provider}...`);
       const response = await axios.post(
-        "http://localhost:5163/auth/external-login",
+        `${BASE_URL}/auth/external-login`,
         {
           provider,
           token,
@@ -45,7 +46,7 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       console.log("Đang đăng nhập...");
-      const response = await axios.post("http://localhost:5163/auth/login", {
+      const response = await axios.post(`${BASE_URL}/auth/login`, {
         email,
         password,
       });

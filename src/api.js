@@ -3,7 +3,7 @@
 // File cấu hình API trung tâm - tất cả URL gọi BE đều ở đây
 // ============================================================
 
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5163";
+export const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5163";
 
 // Helper: lấy token từ localStorage
 const getToken = () => localStorage.getItem("token");
