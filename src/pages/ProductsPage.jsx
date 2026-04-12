@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { fetchProducts, fetchCategories } from "../api";
-import { getProductImage } from "../productImages";
+import { fetchProducts, fetchCategories, getFullImageUrl } from "../api";
+import { useCart } from "../context/CartContext";
 
 // ─── Loading Skeleton ──────────────────────────────────────────
 const ProductSkeleton = () => (
@@ -19,14 +19,16 @@ const ProductSkeleton = () => (
 );
 
 // ─── Product Card ──────────────────────────────────────────────
-const ProductCard = ({ product }) => (
+const ProductCard = ({ product }) => {
+  const { addToCart } = useCart();
+  return (
   <Link
     to={`/product/${product.id}`}
     className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group border border-gray-50"
   >
     <div className="relative h-80 overflow-hidden bg-gray-100">
       <img
-        src={getProductImage(product.image)}
+        src={getFullImageUrl(product.image)}
         alt={product.name}
         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         onError={(e) => {
@@ -65,8 +67,9 @@ const ProductCard = ({ product }) => (
         </span>
         <button
           onClick={(e) => {
-            e.preventDefault(); // Không navigate khi click nút giỏ
-            alert(`Đã thêm "${product.name}" vào giỏ hàng!`);
+            e.preventDefault();
+            addToCart(product, 1);
+            alert(`🛒 Đã thêm "${product.name}" vào giỏ hàng!`);
           }}
           disabled={product.stock === 0}
           className="p-2.5 bg-[#f0f7f0] text-[#76a375] rounded-full hover:bg-[#76a375] hover:text-white transition-colors duration-300 shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
@@ -80,7 +83,8 @@ const ProductCard = ({ product }) => (
       </div>
     </div>
   </Link>
-);
+  );
+};
 
 // ─── Main Page ─────────────────────────────────────────────────
 const ProductsPage = () => {

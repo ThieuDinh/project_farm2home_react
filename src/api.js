@@ -14,6 +14,17 @@ const authHeaders = () => ({
   ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {}),
 });
 
+// Helper: Phục hồi đường dẫn ảnh (Vì DB lưu filename)
+export const getFullImageUrl = (url, type = 'product') => {
+  if (!url) return 'https://via.placeholder.com/50';
+  if (url.startsWith('http')) return url;
+  if (!url.startsWith('/')) {
+      const folder = type === 'category' ? 'category' : 'products';
+      return `${BASE_URL}/images/${folder}/${url}`;
+  }
+  return `${BASE_URL}${url}`;
+};
+
 // ─── PRODUCTS ────────────────────────────────────────────────
 
 /**

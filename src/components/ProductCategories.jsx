@@ -2,42 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CategoryCard from './CategoryCard';
 import { fetchCategories } from '../api';
 
-/**
- * Mapping các danh mục thực từ DB sang ảnh chất lượng cao
- * để đảm bảo giao diện luôn bắt mắt.
- */
-const CATEGORY_STYLES = {
-  "Trái cây sấy": {
-    image: "https://images.unsplash.com/photo-1596591606975-97ee5cef3a1e?w=800&q=80",
-    desc: "Giữ trọn hương vị tự nhiên với công nghệ sấy hiện đại.",
-    color: "bg-orange-50"
-  },
-  "Nông sản": {
-    image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80",
-    desc: "Sản phẩm tươi sạch, an toàn trực tiếp từ trang trại.",
-    color: "bg-green-50"
-  },
-  "Hạt đặc sản": {
-    image: "https://images.unsplash.com/photo-1536511132770-e50669106095?w=800&q=80",
-    desc: "Nguồn dinh dưỡng quý giá cho sức khỏe mỗi ngày.",
-    color: "bg-stone-50"
-  },
-  "Bánh kẹo": {
-    image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=800&q=80",
-    desc: "Ngọt ngào hương vị quê hương tinh tế.",
-    color: "bg-pink-50"
-  },
-  "Trà": {
-    image: "https://images.unsplash.com/photo-1544787210-282ba-f481e104ae0?w=800&q=80",
-    desc: "Thưởng thức tinh hoa trà Việt đậm đà.",
-    color: "bg-emerald-50"
-  },
-  "default": {
-    image: "https://images.unsplash.com/photo-1516594798947-e65505dbb29d?w=800&q=80",
-    desc: "Khám phá những sản phẩm nông sản tinh túy.",
-    color: "bg-gray-50"
-  }
-};
+import { BASE_URL } from '../api';
 
 const ProductCategories = () => {
   const [categories, setCategories] = useState([]);
@@ -79,15 +44,25 @@ const ProductCategories = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {categories.map((cat) => {
-              const style = CATEGORY_STYLES[cat.name] || CATEGORY_STYLES.default;
+            {categories.map((cat, idx) => {
+              // Frontend tự quyết định dải màu thay vì query từ Backend
+              const bgColors = ["bg-orange-50", "bg-green-50", "bg-yellow-50", "bg-blue-50", "bg-pink-50", "bg-purple-50"];
+              const styleClass = bgColors[idx % bgColors.length];
+              
+              let imgSrc = `${BASE_URL}/images/category/nongsan.webp`; // fallback
+              if (cat.imageUrl) {
+                if (cat.imageUrl.startsWith('http')) imgSrc = cat.imageUrl;
+                else if (cat.imageUrl.startsWith('/')) imgSrc = `${BASE_URL}${cat.imageUrl}`;
+                else imgSrc = `${BASE_URL}/images/category/${cat.imageUrl}`;
+              }
+
               return (
                 <CategoryCard 
                   key={cat.id}
                   title={cat.name}
-                  description={style.desc}
-                  imageSrc={style.image}
-                  styleClass={style.color}
+                  description={cat.description || "Khám phá những sản phẩm nông sản tinh túy."}
+                  imageSrc={imgSrc}
+                  styleClass={styleClass}
                   link={`/products?category=${encodeURIComponent(cat.name)}`}
                 />
               );

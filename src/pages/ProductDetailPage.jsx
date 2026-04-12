@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { fetchProductById } from "../api";
-import { getProductImage } from "../productImages";
+import { fetchProductById, getFullImageUrl } from "../api";
+import { useCart } from "../context/CartContext";
 
 const ProductDetailPage = () => {
+  const { addToCart } = useCart();
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
@@ -21,8 +22,8 @@ const ProductDetailPage = () => {
   }, [id]);
 
   const handleAddToCart = () => {
-    // TODO: Tích hợp Cart Context / Redux
-    alert(`Đã thêm ${quantity} x ${product.name} vào giỏ hàng!`);
+    addToCart(product, quantity);
+    alert(`🛒 Đã thêm ${quantity} x ${product.name} vào giỏ hàng thành công!`);
   };
 
   // ── Loading ────────────────────────────────────────────────
@@ -88,7 +89,7 @@ const ProductDetailPage = () => {
             {/* Cột ảnh */}
             <div className="p-8 flex items-center justify-center bg-gray-50 relative">
               <img
-                src={getProductImage(product.image)}
+                src={getFullImageUrl(product.image)}
                 alt={product.name}
                 className="w-full max-w-md h-full object-cover rounded-xl shadow-md"
                 onError={(e) => {

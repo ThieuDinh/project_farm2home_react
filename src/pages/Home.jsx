@@ -120,7 +120,7 @@ const Home = () => {
                     <div className="flex items-center justify-between">
                       <p className="text-2xl font-black text-red-600 tracking-tight">
                         {sp.price.toLocaleString("vi-VN")} ₫
-                        <span className="text-xs text-gray-400 font-bold ml-1 uppercase">/ {sp.unit || "Bịch"}</span>
+                        
                       </p>
                       <button 
                         onClick={(e) => {

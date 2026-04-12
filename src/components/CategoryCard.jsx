@@ -7,10 +7,10 @@ const CategoryCard = ({ title, description, imageSrc, link, styleClass }) => {
       to={link}
       className={`group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col ${styleClass}`}
     >
-      <div className="relative h-64 overflow-hidden">
+      <div className="relative h-64 overflow-hidden flex items-center justify-center p-4">
         <img 
           alt={title} 
-          className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700" 
+          className="object-contain w-full h-full group-hover:scale-110 transition-transform duration-700" 
           src={imageSrc || 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&q=80'} 
         />
         <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500" />

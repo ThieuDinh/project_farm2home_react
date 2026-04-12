@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BASE_URL } from "../api";
+import { BASE_URL, fetchMyOrders, getFullImageUrl } from "../api";
 const ProfilePage = () => {
   // --- STATE QUẢN LÝ DỮ LIỆU ---
   const [profile, setProfile] = useState({
@@ -34,6 +34,22 @@ const ProfilePage = () => {
 
   const [message, setMessage] = useState({ type: "", text: "" });
   const [isLoading, setIsLoading] = useState(false);
+
+  // Tab State
+  const [activeTab, setActiveTab] = useState('profile'); // 'profile' | 'orders'
+  const [orders, setOrders] = useState([]);
+  const [loadingOrders, setLoadingOrders] = useState(false);
+
+  // --- EFFECT: LẤY ĐƠN HÀNG 
+  useEffect(() => {
+    if (activeTab === 'orders' && orders.length === 0) {
+      setLoadingOrders(true);
+      fetchMyOrders()
+        .then(data => setOrders(data))
+        .catch(err => console.error(err))
+        .finally(() => setLoadingOrders(false));
+    }
+  }, [activeTab]);
 
   // --- EFFECT: LẤY DỮ LIỆU USER VÀ DANH SÁCH TỈNH/THÀNH ---
   useEffect(() => {
@@ -240,9 +256,24 @@ const ProfilePage = () => {
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Hồ sơ cá nhân</h1>
           <p className="mt-2 text-sm text-gray-600">
-            Quản lý thông tin, địa chỉ giao hàng và bảo mật tài khoản Farm2Home
-            của bạn.
+            Quản lý thông tin, địa chỉ giao hàng và đơn mua hàng Farm2Home của bạn.
           </p>
+        </div>
+
+        {/* Tab Navigation */}
+        <div className="flex border-b border-gray-200 gap-8">
+           <button 
+             onClick={() => setActiveTab('profile')} 
+             className={`py-4 font-bold text-sm border-b-2 transition-colors ${activeTab === 'profile' ? 'border-[#76a375] text-[#76a375]' : 'border-transparent text-gray-500 hover:text-gray-800'}`}
+           >
+             Hồ sơ & Bảo mật
+           </button>
+           <button 
+             onClick={() => setActiveTab('orders')} 
+             className={`py-4 font-bold text-sm border-b-2 transition-colors ${activeTab === 'orders' ? 'border-[#76a375] text-[#76a375]' : 'border-transparent text-gray-500 hover:text-gray-800'}`}
+           >
+             Đơn hàng của tôi
+           </button>
         </div>
 
         {message.text && (
@@ -253,6 +284,8 @@ const ProfilePage = () => {
           </div>
         )}
 
+        {/* KHU VỰC CHỈ HIỂN THỊ KHI Ở TAB PROFILE */}
+        {activeTab === 'profile' && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* CỘT TRÁI: Liên kết mạng xã hội & Tài khoản */}
           <div className="md:col-span-1 space-y-6">
@@ -332,7 +365,7 @@ const ProfilePage = () => {
               className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100"
             >
               <h3 className="text-xl font-bold text-gray-800 mb-6">
-                Thông tin cá nhân & Địa chỉ
+                Thông tin cá nhân - Địa chỉ
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
@@ -505,6 +538,71 @@ const ProfilePage = () => {
             </form>
           </div>
         </div>
+        )}
+
+        {/* CỘT TÀI KHOẢN KHI CHỌN TAB ĐƠN HÀNG */}
+        {activeTab === 'orders' && (
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden min-h-[400px]">
+             <div className="p-6 sm:p-8">
+               <h3 className="text-xl font-bold text-gray-800 mb-6 border-b border-gray-100 pb-4">Lịch sử đơn hàng</h3>
+               
+               {loadingOrders ? (
+                 <div className="text-center py-10 text-gray-500">Đang tải dữ liệu...</div>
+               ) : orders.length === 0 ? (
+                 <div className="text-center py-10">
+                   <p className="text-gray-500 mb-4">Bạn chưa có đơn hàng nào.</p>
+                   <a href="/products" className="text-[#2b5c3f] font-bold hover:underline">Khám phá cửa hàng</a>
+                 </div>
+               ) : (
+                 <div className="space-y-6">
+                    {orders.map(order => (
+                      <div key={order.orderId} className="border border-gray-100 rounded-xl p-6 hover:shadow-md transition-shadow">
+                         <div className="flex justify-between items-center mb-4 border-b border-gray-50 pb-4">
+                            <div>
+                               <span className="font-bold text-gray-800 text-lg">Đơn hàng #{order.orderId}</span>
+                               <p className="text-sm text-gray-500 mt-1">{new Date(order.createdAt).toLocaleString('vi-VN')}</p>
+                            </div>
+                            <span className={`px-4 py-1.5 rounded-full text-xs font-bold ${
+                              order.status === 'Pending' ? 'bg-orange-100 text-orange-700' :
+                              order.status === 'Shipping' ? 'bg-blue-100 text-blue-700' :
+                              order.status === 'Done' ? 'bg-green-100 text-green-700' :
+                              'bg-gray-100 text-gray-700'
+                            }`}>
+                               {order.status === 'Pending' ? 'Đang chờ xử lý' : 
+                                order.status === 'Shipping' ? 'Đang giao hàng' : 
+                                order.status === 'Done' ? 'Giao thành công' : order.status}
+                            </span>
+                         </div>
+                         
+                         <ul className="divide-y divide-gray-50">
+                           {order.items.map(item => (
+                             <li key={item.productId} className="py-3 flex gap-4 items-center">
+                               <img src={getFullImageUrl(item.productImage)} className="w-16 h-16 rounded-lg object-cover border border-gray-100" alt={item.productName} />
+                               <div className="flex-1">
+                                  <h4 className="font-bold text-gray-800">{item.productName}</h4>
+                                  <p className="text-sm text-gray-500">Số lượng: {item.quantity}</p>
+                               </div>
+                               <div className="text-right font-medium text-gray-700">
+                                  {(item.unitPrice * item.quantity).toLocaleString('vi-VN')}đ
+                               </div>
+                             </li>
+                           ))}
+                         </ul>
+
+                         <div className="mt-4 pt-4 border-t border-gray-50 flex justify-between items-center text-sm">
+                            <span className="text-gray-500">Phí ship: {order.shippingFee.toLocaleString('vi-VN')}đ | Giảm: {order.discount.toLocaleString('vi-VN')}đ</span>
+                            <div className="text-right">
+                               Tổng thanh toán: <span className="font-black text-xl text-[#2b5c3f] ml-2">{order.total.toLocaleString('vi-VN')}đ</span>
+                            </div>
+                         </div>
+                      </div>
+                    ))}
+                 </div>
+               )}
+             </div>
+          </div>
+        )}
+
       </div>
     </div>
   );
